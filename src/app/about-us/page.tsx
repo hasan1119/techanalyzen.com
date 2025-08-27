@@ -14,7 +14,7 @@ const TEAM = [
     name: "Joy Sarkar",
     role: "COO",
     desc: "Ensuring smooth operations and client satisfaction.",
-    img: "/logo-2.jpg",
+    img: "/partner-2.jpg",
   },
   {
     name: "Rashed Khan",

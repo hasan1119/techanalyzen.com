@@ -18,6 +18,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Techanalyzen",
   description: "Maximize Your Growth with Techanalyzen Tech Services",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
@@ -30,9 +35,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col justify-between`}>
         <Navbar />
-        <main className='w-full'>
-          {children}
-        </main>
+        <main className='w-full'>{children}</main>
         <Footer />
       </body>
     </html>
