@@ -1,7 +1,8 @@
 "use client";
 
+import Container from "@/common/Container";
+import Logo from "@/common/Logo";
 import { Figtree } from "next/font/google";
-import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
 import { ThemeToggle } from "./theme-toggle";
@@ -28,35 +29,35 @@ const NAV_LINKS = [
 
 export function Navbar() {
   return (
-    <nav className='w-full  bg-background/80  supports-[backdrop-filter]:bg-background/60 sticky  shadow dark:shadow-none bg-gradient-to-t from-gray-900 to-black top-0 z-50 backdrop-blur-2xl transition-colors duration-500 border-b border-b-[#1c222b]'>
-      <div className='container mx-auto flex items-center justify-between py-2 px-4'>
-        {/* Logo */}
-        <Link href='/' className='flex items-center gap-2'>
-          <Image src='/logo.png' alt='Logo' width={100} height={100} />
-        </Link>
-        {/* Navigation Menu (Desktop) */}
-        <NavigationMenu className='hidden md:flex'>
-          <NavigationMenuList>
-            {NAV_LINKS.map(({ link, label }, index) => (
-              <NavigationMenuItem key={index}>
-                <NavigationMenuLink asChild className={`px-4 py-2 ${figtree.className}`}>
-                  <Link
-                    className='px-4 py-2 font-semibold text-[15px] hover:bg-transparent hover:text-primary transition-all duration-200'
-                    href={link}>
-                    {label}
-                  </Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-            ))}
-            {/* <Button type='button' className='bg-transparent hover:bg-primary hover:text-primary-foreground border border-transparent hover:border-primary transition-all duration-200 cursor-pointer dark:text-primary-foreground text-black'> Button </Button> */}
-          </NavigationMenuList>
-        </NavigationMenu>
-        {/* Theme Toggle + Mobile Menu */}
-        <div className='flex items-center gap-2'>
-          <ThemeToggle />
-          <MobileMenu />
+    <nav className='w-full gradient-primary supports-[backdrop-filter]:bg-background/60 sticky  shadow dark:shadow-none  bg-slate-50/60 dark:!bg-gradient-to-t from-gray-900 to-black top-0 z-50 backdrop-blur-2xl transition-colors duration-500 dark:border-b border-b-[#1c222b]'>
+      <Container>
+        <div className='flex items-center justify-between py-2 px-4'>
+          {/* Logo */}
+          <Logo />
+          {/* Navigation Menu (Desktop) */}
+          <NavigationMenu className='hidden md:flex'>
+            <NavigationMenuList>
+              {NAV_LINKS.map(({ link, label }, index) => (
+                <NavigationMenuItem key={index}>
+                  <NavigationMenuLink asChild className={`px-4 py-2 ${figtree.className}`}>
+                    <Link
+                      className='px-4 py-2 font-semibold text-[15px] hover:bg-transparent hover:text-primary transition-all duration-200'
+                      href={link}>
+                      {label}
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              ))}
+              {/* <Button type='button' className='bg-transparent hover:bg-primary hover:text-primary-foreground border border-transparent hover:border-primary transition-all duration-200 cursor-pointer dark:text-primary-foreground text-black'> Button </Button> */}
+            </NavigationMenuList>
+          </NavigationMenu>
+          {/* Theme Toggle + Mobile Menu */}
+          <div className='flex items-center gap-2'>
+            <ThemeToggle />
+            <MobileMenu />
+          </div>
         </div>
-      </div>
+      </Container>
     </nav>
   );
 }

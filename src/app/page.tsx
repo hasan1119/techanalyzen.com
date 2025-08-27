@@ -1,16 +1,17 @@
 import Hero from "@/components/Hero";
-import { PartnersSection } from "../components/partners-section";
-import { CustomerReviews } from "./_components/customer-reviews";
+import OurProjectsSection from "./_components/our-projects-section";
+import OurTeamSection from "./_components/our-team-section";
 import { ServicesSection } from "./_components/services-section";
+import TestimonialSection from "./_components/testimonial-section";
 
 export default function Home() {
   return (
     <>
-      {/* <HeroSection /> */}
       <Hero />
       <ServicesSection />
-      <PartnersSection />
-      <CustomerReviews />
+      <OurProjectsSection />
+      <TestimonialSection />
+      <OurTeamSection />
     </>
   );
 }

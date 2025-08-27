@@ -17,7 +17,9 @@ const figtree = Figtree({
 
 const Hero = () => {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-gray-900 to-black py-20 px-6 md:px-12 lg:px-20 lg:min-h-[calc(100vh_-_89px)] h-full flex items-center justify-center">
+    <section className="relative overflow-hidden gradient-primary dark:!bg-gradient-to-b from-gray-900 to-black py-20 px-6 md:px-12 lg:px-20 lg:min-h-[calc(100vh_-_116px)] h-full flex items-center justify-center">
+      <div className="absolute hidden h-16 w-[600px] rotate-[-40deg] rounded-3xl bg-sky-400 opacity-10 blur-2xl filter dark:hidden lg:top-24 lg:-right-28 lg:block lg:h-12 lg:w-[600px] lg:opacity-30 lg:blur-2xl xl:-right-40 xl:h-4 xl:w-[700px] xl:opacity-100"></div>
+      <div className="absolute hidden h-14 w-[600px] rotate-[-40deg] rounded-3xl bg-purple-400 opacity-30 blur-2xl filter dark:hidden lg:top-20 lg:-right-28 lg:block lg:h-10 lg:w-[600px] lg:opacity-20 lg:blur-xl xl:-right-40 xl:h-2 xl:w-[800px] xl:opacity-100"></div>
       <div className="max-w-5xl mx-auto text-center relative z-10">
         {/* Heading */}
         <motion.h1
@@ -29,11 +31,11 @@ const Hero = () => {
           <span className="px-3 py-1 bg-pink-600 text-white rounded-md inline-block rotate-[-1.737deg]">
             Maximize
           </span>{" "}
-          <span className="text-white">Your 🚀 Growth</span>
+          <span className="text-[#050713] dark:text-white">Your 🚀 Growth</span>
           <br />
-          <span className="text-white">with</span>{" "}
+          <span className="text-[#050713] dark:text-white">with</span>{" "}
           <span className="text-[#39b650]">Techanalyzen</span>{" "}
-          <span className="text-white">Tech Services</span>
+          <span className="text-[#050713] dark:text-white">Tech Services</span>
         </motion.h1>
 
         {/* Description */}
@@ -41,7 +43,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.7 }}
-          className={`font-medium mt-6 text-gray-300 text-lg px-2 md:px-0 max-w-2xl mx-auto ${figtree.className}`}
+          className={`font-medium mt-6 text-[#3C3C3D] dark:text-gray-300 text-lg px-2 md:px-0 max-w-2xl mx-auto ${figtree.className}`}
         >
           We provide professional Tech Services specializing in website
           development and modern digital solutions. Our team ensures scalable,
@@ -85,6 +87,8 @@ const Hero = () => {
       >
         💡
       </motion.span>
+      <div className="absolute h-16 w-[600px] rotate-[-40deg] rounded-3xl bg-sky-400 opacity-10 blur-2xl filter dark:hidden lg:bottom-24 lg:-left-28 lg:h-12 lg:w-[600px] lg:opacity-30 lg:blur-2xl xl:-left-40 xl:h-4 xl:w-[700px] xl:opacity-100"></div>
+      <div className="absolute h-14 w-[600px] rotate-[-40deg] rounded-3xl bg-purple-400 opacity-30 blur-2xl filter dark:hidden lg:bottom-20 lg:-left-28 lg:h-10 lg:w-[600px] lg:opacity-20 lg:blur-xl xl:-left-40 xl:h-2 xl:w-[800px] xl:opacity-100"></div>
     </section>
   );
 };
