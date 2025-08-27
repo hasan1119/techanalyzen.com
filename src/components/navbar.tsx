@@ -1,5 +1,6 @@
 "use client";
 
+import { Figtree } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
@@ -11,6 +12,12 @@ import {
   NavigationMenuList,
 } from "./ui/navigation-menu";
 
+const figtree = Figtree({
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-figtree",
+  subsets: ["latin"],
+})
+
 const NAV_LINKS = [
   { link: "/", label: "HOME" },
   { link: "/services", label: "SERVICES" },
@@ -21,18 +28,18 @@ const NAV_LINKS = [
 
 export function Navbar() {
   return (
-    <nav className='w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50'>
+    <nav className='w-full  bg-background/80  supports-[backdrop-filter]:bg-background/60 sticky  shadow dark:shadow-none bg-gradient-to-t from-gray-900 to-black top-0 z-50 backdrop-blur-2xl transition-colors duration-500 border-b border-b-[#1c222b]'>
       <div className='container mx-auto flex items-center justify-between py-2 px-4'>
         {/* Logo */}
         <Link href='/' className='flex items-center gap-2'>
-          <Image src='/logo-1.png' alt='Logo' width={32} height={32} />
+          <Image src='/logo.png' alt='Logo' width={100} height={100} />
         </Link>
         {/* Navigation Menu (Desktop) */}
         <NavigationMenu className='hidden md:flex'>
           <NavigationMenuList>
             {NAV_LINKS.map(({ link, label }, index) => (
               <NavigationMenuItem key={index}>
-                <NavigationMenuLink asChild className='px-4 py-2'>
+                <NavigationMenuLink asChild className={`px-4 py-2 ${figtree.className}`}>
                   <Link
                     className='px-4 py-2 font-semibold text-[15px] hover:bg-transparent hover:text-primary transition-all duration-200'
                     href={link}>

@@ -1,12 +1,13 @@
+import Hero from "@/components/Hero";
 import { PartnersSection } from "../components/partners-section";
 import { CustomerReviews } from "./_components/customer-reviews";
-import { HeroSection } from "./_components/hero-section";
 import { ServicesSection } from "./_components/services-section";
 
 export default function Home() {
   return (
     <>
-      <HeroSection />
+      {/* <HeroSection /> */}
+      <Hero />
       <ServicesSection />
       <PartnersSection />
       <CustomerReviews />
