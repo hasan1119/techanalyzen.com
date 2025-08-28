@@ -21,10 +21,11 @@ const figtree = Figtree({
 
 const NAV_LINKS = [
   { link: "/", label: "HOME" },
-  { link: "/services", label: "SERVICES" },
-  { link: "/blogs", label: "BLOGS" },
-  { link: "/about-us", label: "ABOUT US" },
-  { link: "/contact-us", label: "CONTACT US" },
+  { link: "#services", label: "SERVICES" },
+  { link: "#blogs", label: "BLOGS" },
+  { link: "#about", label: "ABOUT US" },
+  { link: "#contact", label: "CONTACT US" },
+  { link: "#testimonials", label: "TESTIMONIALS" },
 ];
 
 export function Navbar() {

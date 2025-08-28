@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import ContactSection from "./_components/contact-section";
 import OurProjectsSection from "./_components/our-projects-section";
 import OurTeamSection from "./_components/our-team-section";
 import { ServicesSection } from "./_components/services-section";
@@ -12,6 +13,7 @@ export default function Home() {
       <OurProjectsSection />
       <TestimonialSection />
       <OurTeamSection />
+      <ContactSection />
     </>
   );
 }

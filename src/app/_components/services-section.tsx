@@ -49,7 +49,7 @@ const SERVICES = [
 
 export function ServicesSection() {
   return (
-    <section className="gradient-primary border-t">
+    <section id="services" className="gradient-primary border-t">
       <Container>
         <div className="w-full py-18 px-4 md:px-8 lg:px-0">
           <motion.div initial={{ opacity: 0, y: 50 }}

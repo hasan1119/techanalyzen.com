@@ -4,7 +4,7 @@ import SectionTitle from "@/common/SectionTitle";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { ExternalLink, Github, Linkedin, Twitter } from "lucide-react";
+import { ExternalLink, Facebook, Github, Linkedin } from "lucide-react";
 import { Figtree, Unbounded } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,27 +26,27 @@ const teamMembers = [
     name: "MD. Rokibul Hasan",
     role: "Founder & CEO",
     image: "/hasan.jpeg",
-    twitter: "https://www.facebook.com/md.rokibul.hasan.bd",
+    facebook: "https://www.facebook.com/md.rokibul.hasan.bd",
     github: "https://github.com/hasan1119",
     linkedin: "https://www.linkedin.com/in/md-rokibul-hasan",
     portfolio: "#",
   },
   {
-    name: "Joy Sorkar",
+    name: "Joy Sarkar",
     role: "Full Stack Developer",
     image: "/joy-sorkar.jpg",
-    twitter: "#",
-    github: "#",
-    linkedin: "#",
+    facebook: "https://www.facebook.com/webdev.joysarkar",
+    github: "https://github.com/JoySarkarBD",
+    linkedin: "https://www.linkedin.com/in/joysarkarbd/",
     portfolio: "#",
   },
   {
     name: "Dipto Das",
     role: "Frontend Developer",
     image: "/dipto_10.jpg",
-    twitter: "#",
-    github: "#",
-    linkedin: "#",
+    facebook: "https://www.facebook.com/developer.dipto.das.10/",
+    github: "https://github.com/diptowebhero",
+    linkedin: "https://www.linkedin.com/in/dipto-das-617901216/",
     portfolio: "https://dev-dipto.vercel.app/",
   },
 ];
@@ -54,7 +54,7 @@ const teamMembers = [
 const OurTeamSection = () => {
 
   return (
-    <section className="relative overflow-hidden gradient-primary dark:!bg-gradient-to-b from-gray-900 to-black border-t flex items-center justify-center">
+    <section id="about" className="relative overflow-hidden gradient-primary dark:!bg-gradient-to-b from-gray-900 to-black border-t flex items-center justify-center">
       <Container>
         <div className="w-full py-18 px-4 md:px-8 lg:px-0">
           <motion.div
@@ -85,6 +85,7 @@ const OurTeamSection = () => {
                       alt={member.name}
                       width={120}
                       height={120}
+                      quality={100}
                       className="rounded-md size-[220px] border-4 border-primary shadow-md object-cover"
                     />
                     <h3 className={`mt-4 text-xl font-semibold text-gray-900 dark:text-white ${unbounded.className}`}>
@@ -97,8 +98,8 @@ const OurTeamSection = () => {
                   <CardContent className="flex flex-col items-center gap-3 pb-6">
                     {/* Social Links */}
                     <div className="flex gap-4">
-                      <Link href={member.twitter} target="_blank">
-                        <Twitter className="h-5 w-5 text-gray-500 hover:text-sky-400 transition-colors" />
+                      <Link href={member.facebook} target="_blank">
+                        <Facebook className="h-5 w-5 text-gray-500 hover:text-sky-400 transition-colors" />
                       </Link>
                       <Link href={member.github} target="_blank">
                         <Github className="h-5 w-5 text-gray-500 hover:text-gray-800 dark:hover:text-white transition-colors" />

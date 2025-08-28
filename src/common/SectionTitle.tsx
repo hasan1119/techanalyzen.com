@@ -5,8 +5,8 @@ const unbounded = Unbounded({
   variable: "--font-unbounded",
   subsets: ["latin"],
 })
-export default function SectionTitle({ children }: { children: React.ReactNode }) {
+export default function SectionTitle({ children, className }: { children: React.ReactNode, className?: string }) {
   return (
-    <h2 className={`text-5xl md:text-[60px] max-w-[900px] mx-auto font-bold !leading-[60px] uppercase text-center mt-10 whitespace-pre-wrap section-title ${unbounded.className}`}>{children}</h2>
+    <h2 className={`text-5xl md:text-[60px] max-w-[900px] mx-auto font-bold !leading-[60px] uppercase text-center mt-10 whitespace-pre-wrap section-title ${unbounded.className} ${className}`}>{children}</h2>
   );
 }

@@ -85,7 +85,7 @@ const anonymousFallbackImage = "https://placehold.co/48x48/6B7280/FFFFFF?text=AA
 
 const TestimonialSection = () => {
   return (
-    <section className="gradient-primary border-t">
+    <section id="testimonials" className="gradient-primary border-t">
       <Container>
         <div className="w-full py-18 px-4 md:px-8 lg:px-0">
           <motion.div
