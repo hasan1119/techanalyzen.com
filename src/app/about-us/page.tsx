@@ -8,13 +8,13 @@ const TEAM = [
     name: "Rokibul Hasan",
     role: "Founder & CEO",
     desc: "Visionary leader driving innovation and excellence.",
-    img: "/logo-1.png",
+    img: "/hasan.jpeg",
   },
   {
     name: "Joy Sarkar",
     role: "COO",
     desc: "Ensuring smooth operations and client satisfaction.",
-    img: "/partner-2.jpg",
+    img: "/joy.jpeg",
   },
   {
     name: "Rashed Khan",
@@ -26,7 +26,7 @@ const TEAM = [
     name: "Dipto Das",
     role: "Head of Wellness",
     desc: "Championing healthcare and wellness initiatives.",
-    img: "/logo-2.jpg",
+    img: "/dipto.jpeg",
   },
 ];
 
