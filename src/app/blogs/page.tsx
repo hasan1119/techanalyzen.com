@@ -1,6 +1,8 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import {
   Card,
   CardContent,
@@ -8,18 +10,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { MultiSelect } from "@/components/ui/multi-select";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Skeleton } from "@/components/ui/skeleton";
+import { format } from "date-fns";
 import {
-  Filter as FilterIcon,
+  Calendar,
+  Filter,
   LayoutGrid,
-  List as ListIcon,
+  ListIcon,
   Megaphone,
   Search as SearchIcon,
 } from "lucide-react";
@@ -98,16 +102,23 @@ export default function BlogPage() {
   const [filter, setFilter] = useState<
     "all" | "recent" | "popular" | "trending"
   >("all");
-  const [category, setCategory] = useState<string>("all");
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [dateFilter, setDateFilter] = useState<
+    "all" | "week" | "month" | "custom"
+  >("all");
+  const [dateRange, setDateRange] = useState<{
+    from: Date | undefined;
+    to: Date | undefined;
+  }>({ from: undefined, to: undefined });
+  const [sortBy, setSortBy] = useState<
+    "relevance" | "date" | "popularity" | "rating"
+  >("relevance");
   const loader = useRef<HTMLDivElement | null>(null);
 
-  // Load initial blogs
   useEffect(() => {
     loadMore();
-    // eslint-disable-next-line
   }, []);
 
-  // Infinite scroll observer
   useEffect(() => {
     if (!loader.current) return;
     const observer = new IntersectionObserver(
@@ -120,7 +131,6 @@ export default function BlogPage() {
     );
     observer.observe(loader.current);
     return () => observer.disconnect();
-    // eslint-disable-next-line
   }, [loading, hasMore]);
 
   function loadMore() {
@@ -131,18 +141,19 @@ export default function BlogPage() {
         generateBlog(next + i)
       );
       setBlogs((prev) => [...prev, ...newBlogs]);
-      setHasMore(blogs.length + newBlogs.length < 60); // Limit to 60 for demo
+      setHasMore(blogs.length + newBlogs.length < 60);
       setLoading(false);
     }, 1200);
   }
 
-  // Filter and sort blogs
   let filteredBlogs = blogs.filter(
     (blog) =>
-      (category === "all" || blog.category === category) &&
+      (selectedCategories.length === 0 ||
+        selectedCategories.includes(blog.category)) &&
       (blog.title.toLowerCase().includes(search.toLowerCase()) ||
         blog.description.toLowerCase().includes(search.toLowerCase()))
   );
+
   if (filter === "recent") {
     filteredBlogs = filteredBlogs
       .filter((b) => b.badge === "Recently Added")
@@ -157,6 +168,37 @@ export default function BlogPage() {
       .sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
   }
 
+  if (dateFilter !== "all") {
+    const now = new Date("2025-08-27T22:00:00+06:00");
+    let start: number;
+    if (dateFilter === "week") {
+      start = now.getTime() - 7 * 24 * 60 * 60 * 1000;
+      filteredBlogs = filteredBlogs.filter(
+        (blog) => (blog.createdAt || 0) >= start
+      );
+    } else if (dateFilter === "month") {
+      start = now.getTime() - 30 * 24 * 60 * 60 * 1000;
+      filteredBlogs = filteredBlogs.filter(
+        (blog) => (blog.createdAt || 0) >= start
+      );
+    } else if (dateFilter === "custom" && dateRange.from && dateRange.to) {
+      const startTime = dateRange.from.getTime();
+      const endTime = dateRange.to.getTime();
+      filteredBlogs = filteredBlogs.filter(
+        (blog) =>
+          (blog.createdAt || 0) >= startTime && (blog.createdAt || 0) <= endTime
+      );
+    }
+  }
+
+  if (sortBy === "date") {
+    filteredBlogs.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+  } else if (sortBy === "popularity") {
+    filteredBlogs.sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
+  } else if (sortBy === "rating") {
+    filteredBlogs.sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
+  }
+
   return (
     <section className='container min-h-[80vh] py-16 px-4 md:px-8 lg:px-0 mx-auto'>
       <div className='mb-8'>
@@ -166,74 +208,197 @@ export default function BlogPage() {
         <p className='text-muted-foreground text-lg max-w-2xl mx-auto mb-6 text-center'>
           Insights, stories, and updates from RX Group of Corporation.
         </p>
-        <div className='flex flex-col lg:flex-row items-center justify-between gap-4'>
-          {/* Search left */}
-          <div className='w-full lg:w-auto flex-1 flex items-center gap-2'>
-            <div className='relative w-full md:w-72'>
-              <span className='absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground'>
-                <SearchIcon className='size-4' />
-              </span>
-              <input
-                type='text'
-                placeholder='Search blog posts...'
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className='border rounded-md pl-10 pr-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-primary'
-              />
+        <div className='flex flex-wrap items-center justify-center sm:justify-end gap-4'>
+          <div className='flex items-center gap-2 flex-col sm:flex-row w-full sm:w-auto'>
+            <div className='w-full sm:w-auto flex-1 flex items-center gap-2'>
+              <div className='relative flex items-center w-full sm:w-64 md:w-72'>
+                <div className='relative w-full md:w-72'>
+                  <span className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400'>
+                    <SearchIcon className='size-4' />
+                  </span>
+                  <input
+                    type='text'
+                    placeholder='Search blog posts...'
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className='border rounded-md pl-10 pr-4 py-2 w-full focus:ring-primary focus:outline-none outline-none focus:ring-0 ring-0 shadow-none border-gray-300'
+                  />{" "}
+                </div>
+              </div>
             </div>
-          </div>
-          {/* Category, filter, and layout right */}
-          <div className='flex flex-col md:flex-row items-center gap-2'>
-            <Select value={category} onValueChange={setCategory}>
-              <SelectTrigger className='w-40'>
-                <span className='mr-2'>Category</span>
-                <SelectValue placeholder='Category' />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value='all'>All</SelectItem>
-                {CATEGORIES.map((cat) => (
-                  <SelectItem key={cat} value={cat}>
-                    {cat}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <Select
-              value={filter}
-              onValueChange={(v) =>
-                setFilter(v as "all" | "recent" | "popular" | "trending")
-              }>
-              <SelectTrigger className='w-44'>
-                <FilterIcon className='size-4 mr-2' />
-                <SelectValue placeholder='Filter by' />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value='all'>All</SelectItem>
-                <SelectItem value='recent'>Recently Added</SelectItem>
-                <SelectItem value='popular'>Most Popular</SelectItem>
-                <SelectItem value='trending'>Trending</SelectItem>
-              </SelectContent>
-            </Select>
-            <button
-              className={`px-3 py-2 rounded-md border text-sm font-medium transition-colors flex items-center gap-1 ${
-                layout === "grid"
-                  ? "bg-primary text-white"
-                  : "bg-background text-foreground"
-              }`}
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant='outline'
+                  className='border-gray-700 w-full sm:w-auto'>
+                  <Filter className='mr-2 h-4 w-4' /> Filters
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className='w-80 p-4 border shadow'>
+                <div className='space-y-4'>
+                  <div>
+                    <MultiSelect
+                      options={CATEGORIES}
+                      selected={selectedCategories}
+                      onChange={setSelectedCategories}
+                      placeholder='Select categories...'
+                      searchPlaceholder='Search categories...'
+                      key={selectedCategories.join(",")}
+                      label='Categories'
+                    />
+                  </div>
+                  <div>
+                    <h3 className='text-sm font-semibold mb-2'>Date Filter</h3>
+                    <div className='space-y-2'>
+                      <div className='flex items-center space-x-2'>
+                        <Checkbox
+                          id='all-dates'
+                          checked={dateFilter === "all"}
+                          onCheckedChange={(checked) =>
+                            checked && setDateFilter("all")
+                          }
+                        />
+                        <label htmlFor='all-dates' className='text-sm'>
+                          All Dates
+                        </label>
+                      </div>
+                      <div className='flex items-center space-x-2'>
+                        <Checkbox
+                          id='last-week'
+                          checked={dateFilter === "week" && !dateRange.from}
+                          onCheckedChange={(checked) =>
+                            checked && setDateFilter("week")
+                          }
+                        />
+                        <label htmlFor='last-week' className='text-sm'>
+                          Last Week
+                        </label>
+                      </div>
+                      <div className='flex items-center space-x-2'>
+                        <Checkbox
+                          id='last-month'
+                          checked={dateFilter === "month" && !dateRange.from}
+                          onCheckedChange={(checked) =>
+                            checked && setDateFilter("month")
+                          }
+                        />
+                        <label htmlFor='last-month' className='text-sm'>
+                          Last Month
+                        </label>
+                      </div>
+                      <div className='flex items-center space-x-2'>
+                        <Checkbox
+                          id='custom'
+                          checked={dateFilter === "custom"}
+                          onCheckedChange={(checked) =>
+                            checked && setDateFilter("custom")
+                          }
+                        />
+                        <label htmlFor='custom' className='text-sm'>
+                          Custom Range
+                        </label>
+                      </div>
+                      {dateFilter === "custom" && (
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <Button
+                              variant='outline'
+                              className='w-full justify-start text-left font-normal border-gray-700'>
+                              <Calendar className='mr-2 h-4 w-4' />
+                              {dateRange.from && dateRange.to ? (
+                                `${format(dateRange.from, "PPP")} - ${format(
+                                  dateRange.to,
+                                  "PPP"
+                                )}`
+                              ) : (
+                                <span>Pick a date range</span>
+                              )}
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className='w-auto p-0 border-gray-700'>
+                            <CalendarComponent
+                              mode='range'
+                              selected={dateRange}
+                              onSelect={setDateRange}
+                              initialFocus
+                              captionLayout='dropdown'
+                              className='bg-gray-800'
+                            />
+                          </PopoverContent>
+                        </Popover>
+                      )}
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className='text-sm font-semibold mb-2'>Filter by</h3>
+                    <div className='space-y-2'>
+                      <div className='flex items-center space-x-2'>
+                        <Checkbox
+                          id='all'
+                          checked={filter === "all"}
+                          onCheckedChange={(checked) =>
+                            checked && setFilter("all")
+                          }
+                        />
+                        <label htmlFor='all' className='text-sm'>
+                          All
+                        </label>
+                      </div>
+                      <div className='flex items-center space-x-2'>
+                        <Checkbox
+                          id='recent'
+                          checked={filter === "recent"}
+                          onCheckedChange={(checked) =>
+                            checked && setFilter("recent")
+                          }
+                        />
+                        <label htmlFor='recent' className='text-sm'>
+                          Recently Added
+                        </label>
+                      </div>
+                      <div className='flex items-center space-x-2'>
+                        <Checkbox
+                          id='popular'
+                          checked={filter === "popular"}
+                          onCheckedChange={(checked) =>
+                            checked && setFilter("popular")
+                          }
+                        />
+                        <label htmlFor='popular' className='text-sm'>
+                          Most Popular
+                        </label>
+                      </div>
+                      <div className='flex items-center space-x-2'>
+                        <Checkbox
+                          id='trending'
+                          checked={filter === "trending"}
+                          onCheckedChange={(checked) =>
+                            checked && setFilter("trending")
+                          }
+                        />
+                        <label htmlFor='trending' className='text-sm'>
+                          Trending
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
+            <Button
+              variant='outline'
+              className='border-gray-700 w-full sm:w-auto'
               onClick={() => setLayout("grid")}
               aria-label='Grid view'>
-              <LayoutGrid className='size-4' />
-            </button>
-            <button
-              className={`px-3 py-2 rounded-md border text-sm font-medium transition-colors flex items-center gap-1 ${
-                layout === "list"
-                  ? "bg-primary text-white"
-                  : "bg-background text-foreground"
-              }`}
+              <LayoutGrid className='mr-2 h-4 w-4' /> Grid
+            </Button>
+            <Button
+              variant='outline'
+              className='border-gray-700 w-full sm:w-auto'
               onClick={() => setLayout("list")}
               aria-label='List view'>
-              <ListIcon className='size-4' />
-            </button>
+              <ListIcon className='mr-2 h-4 w-4' /> List
+            </Button>
           </div>
         </div>
       </div>
