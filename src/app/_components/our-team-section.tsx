@@ -51,9 +51,10 @@ const teamMembers = [
     name: "Dipto Das",
     role: "Co-Founder & Head of Frontend Engineering",
     image: "/dipto.jpeg",
-    twitter: null,
+    facebook: "https://www.facebook.com/developer.dipto.das.10/",
+    twitter: "https://x.com/DiptoDas1672",
     github: "https://github.com/diptowebhero",
-    linkedin: null,
+    linkedin: "https://www.linkedin.com/in/dipto-das-617901216/",
     portfolio: "https://dev-dipto.vercel.app/",
   },
 ];
