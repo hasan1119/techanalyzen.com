@@ -81,7 +81,7 @@ const OurTeamSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
                 viewport={{ once: true }}>
-                <Card className='rounded-2xl shadow-lg bg-gradient-to-b  transition-all duration-300 bg-white dark:bg-zinc-900/50 p-6 backdrop-blur-sm hover:scale-105 hover:shadow-lg'>
+                <Card className='rounded-2xl min-h-[534px] shadow-lg bg-gradient-to-b  transition-all duration-300 bg-white dark:bg-zinc-900/50 p-6 backdrop-blur-sm hover:scale-105 hover:shadow-lg'>
                   <CardHeader className='flex flex-col items-center p-6'>
                     <Image
                       src={member.image}
