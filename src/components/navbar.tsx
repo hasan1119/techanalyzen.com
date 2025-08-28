@@ -17,15 +17,15 @@ const figtree = Figtree({
   weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-figtree",
   subsets: ["latin"],
-})
+});
 
 const NAV_LINKS = [
   { link: "/", label: "HOME" },
-  { link: "#services", label: "SERVICES" },
-  { link: "#blogs", label: "BLOGS" },
-  { link: "#about", label: "ABOUT US" },
-  { link: "#contact", label: "CONTACT US" },
-  { link: "#testimonials", label: "TESTIMONIALS" },
+  { link: "/#services", label: "SERVICES" },
+  { link: "/blogs", label: "BLOGS" },
+  { link: "/about-us", label: "ABOUT US" },
+  { link: "/#contact", label: "CONTACT US" },
+  { link: "/#testimonials", label: "TESTIMONIALS" },
 ];
 
 export function Navbar() {
@@ -40,7 +40,9 @@ export function Navbar() {
             <NavigationMenuList>
               {NAV_LINKS.map(({ link, label }, index) => (
                 <NavigationMenuItem key={index}>
-                  <NavigationMenuLink asChild className={`px-4 py-2 ${figtree.className}`}>
+                  <NavigationMenuLink
+                    asChild
+                    className={`px-4 py-2 ${figtree.className}`}>
                     <Link
                       className='px-4 py-2 font-semibold text-[15px] hover:bg-transparent hover:text-primary transition-all duration-200'
                       href={link}>
