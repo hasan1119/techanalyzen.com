@@ -17,12 +17,6 @@ const TEAM = [
     img: "/joy.jpeg",
   },
   {
-    name: "Rashed Khan",
-    role: "CTO",
-    desc: "Leading technology and digital transformation.",
-    img: "/logo-1.png",
-  },
-  {
     name: "Dipto Das",
     role: "Head of Wellness",
     desc: "Championing healthcare and wellness initiatives.",
