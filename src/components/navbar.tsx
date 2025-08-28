@@ -20,12 +20,12 @@ const figtree = Figtree({
 });
 
 const NAV_LINKS = [
-  { link: "/", label: "HOME", target: null },
-  { link: "#services", label: "SERVICES", target: null },
-  { link: "/blogs", label: "BLOGS", target: "_blank" },
-  { link: "/about-us", label: "ABOUT US", target: null },
-  { link: "#contact", label: "CONTACT US", target: "_blank" },
-  { link: "#testimonials", label: "TESTIMONIALS", target: null },
+  { link: "/", label: "HOME" },
+  { link: "/#services", label: "SERVICES" },
+  { link: "/blogs", label: "BLOGS" },
+  { link: "/about-us", label: "ABOUT US" },
+  { link: "/#contact", label: "CONTACT US" },
+  { link: "/#testimonials", label: "TESTIMONIALS" },
 ];
 
 export function Navbar() {
@@ -45,8 +45,7 @@ export function Navbar() {
                     className={`px-4 py-2 ${figtree.className}`}>
                     <Link
                       className='px-4 py-2 font-semibold text-[15px] hover:bg-transparent hover:text-primary transition-all duration-200'
-                      href={link}
-                      target={target ?? undefined}>
+                      href={link}>
                       {label}
                     </Link>
                   </NavigationMenuLink>
