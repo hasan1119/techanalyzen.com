@@ -38,7 +38,7 @@ export function Navbar() {
           {/* Navigation Menu (Desktop) */}
           <NavigationMenu className='hidden md:flex'>
             <NavigationMenuList>
-              {NAV_LINKS.map(({ link, label, target }, index) => (
+              {NAV_LINKS.map(({ link, label }, index) => (
                 <NavigationMenuItem key={index}>
                   <NavigationMenuLink
                     asChild
