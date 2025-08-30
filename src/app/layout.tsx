@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-
 import { Footer } from "@/components/footer";
+import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
+import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import { Navbar } from "../components/navbar";
 import "./globals.css";
 
@@ -42,6 +42,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning>
+      <head>
+        {/* Google AdSense verification */}
+        <meta name='google-adsense-account' content='ca-pub-5811365802634379' />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col justify-between`}>
         <ThemeProvider
@@ -50,9 +54,19 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange>
           <Navbar />
+
           <main className='w-full'>{children}</main>
+
           <Footer />
         </ThemeProvider>
+
+        {/* Google AdSense Script */}
+        <Script
+          async
+          src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5811365802634379'
+          crossOrigin='anonymous'
+          strategy='afterInteractive'
+        />
       </body>
     </html>
   );
