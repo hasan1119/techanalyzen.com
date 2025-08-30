@@ -1,6 +1,5 @@
 "use client";
 
-import Script from "next/script";
 import { useEffect } from "react";
 
 declare global {
@@ -31,22 +30,16 @@ export default function AdUnit({
     } catch (err) {
       console.error("AdSense error:", err);
     }
-  }, []);
+  }, [slotId]);
 
   return (
-    <>
-      <ins
-        className={`adsbygoogle ${className || ""}`}
-        style={style || { display: "block" }}
-        data-ad-client='ca-pub-5811365802634379'
-        data-ad-slot={slotId}
-        data-ad-format={format}
-        data-full-width-responsive={responsive ? "true" : "false"}
-      />
-
-      <Script id='ads-init' strategy='afterInteractive'>
-        {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-      </Script>
-    </>
+    <ins
+      className={`adsbygoogle ${className || ""}`}
+      style={style || { display: "block" }}
+      data-ad-client='ca-pub-5811365802634379'
+      data-ad-slot={slotId}
+      data-ad-format={format}
+      data-full-width-responsive={responsive.toString()}
+    />
   );
 }

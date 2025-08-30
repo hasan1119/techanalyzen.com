@@ -460,11 +460,6 @@ export default function BlogPage() {
       </div>
       <div className='flex w-full'>
         <div className='hidden lg:flex flex-col items-center mr-6 w-48'>
-          {/* <Card className='mb-8 flex flex-col items-center justify-center h-64 bg-muted/50 w-full'>
-            <Megaphone className='mb-2 text-primary' size={32} />
-            <span className='font-semibold text-lg'>Advertisement</span>
-            <span className='text-xs text-muted-foreground'>Your ad here</span>
-          </Card> */}
           <AdUnit slotId='5262155604' className='my-6' />
         </div>
         <div

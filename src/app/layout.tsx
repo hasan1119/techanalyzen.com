@@ -54,12 +54,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange>
           <Navbar />
-
           <main className='w-full'>{children}</main>
-
           <Footer />
         </ThemeProvider>
-
         {/* Google AdSense Script */}
         <Script
           async
