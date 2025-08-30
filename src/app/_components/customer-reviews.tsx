@@ -86,16 +86,16 @@ const REVIEWS = [
 
 export function CustomerReviews() {
   return (
-    <section className='w-full py-16 px-4 md:px-8 lg:px-0 max-w-7xl mx-auto'>
-      <div className='text-center mb-12'>
-        <h2 className='text-3xl md:text-4xl font-bold mb-4'>
+    <section className="w-full py-16 px-4 md:px-8 lg:px-0 max-w-7xl mx-auto">
+      <div className="text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">
           Customer Reviews
         </h2>
-        <p className='text-muted-foreground text-lg max-w-2xl mx-auto'>
+        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
           Hear what our clients have to say about working with RX Group.
         </p>
       </div>
-      <div className='relative flex items-center justify-center'>
+      <div className="relative flex items-center justify-center">
         <Carousel
           plugins={[
             Autoplay({
@@ -103,36 +103,37 @@ export function CustomerReviews() {
             }),
           ]}
           opts={{ align: "start", loop: true }}
-          className='w-full max-w-5xl'>
+          className="w-full max-w-5xl"
+        >
           <CarouselContent>
             {REVIEWS.map((review, idx) => (
-              <CarouselItem key={idx} className='sm:basis-1/2 md:basis-1/3'>
-                <Card className='bg-card border rounded-xl shadow-sm p-8 flex flex-col items-center h-full'>
-                  <CardContent className='flex flex-col items-center p-0'>
+              <CarouselItem key={idx} className="sm:basis-1/2 md:basis-1/3">
+                <Card className="bg-card border rounded-xl shadow-sm p-8 flex flex-col items-center h-full">
+                  <CardContent className="flex flex-col items-center p-0">
                     {/* Rating */}
-                    <div className='flex gap-1 mb-2'>
+                    <div className="flex gap-1 mb-2">
                       {[...Array(review.rating)].map((_, i) => (
                         <Star
                           key={i}
-                          className='w-5 h-5 text-yellow-400 fill-yellow-400'
+                          className="w-5 h-5 text-yellow-400 fill-yellow-400"
                         />
                       ))}
                       {[...Array(5 - review.rating)].map((_, i) => (
                         <Star
                           key={i}
-                          className='w-5 h-5 text-muted-foreground'
+                          className="w-5 h-5 text-muted-foreground"
                         />
                       ))}
                     </div>
                     {/* Review */}
-                    <blockquote className='text-lg italic text-center mb-4'>
+                    <blockquote className="text-lg italic text-center mb-4">
                       “{review.review}”
                     </blockquote>
                     {/* Reviewer */}
-                    <div className='font-semibold text-primary text-base'>
+                    <div className="font-semibold text-primary text-base">
                       {review.name}
                     </div>
-                    <div className='text-muted-foreground text-sm'>
+                    <div className="text-muted-foreground text-sm">
                       {review.role}
                     </div>
                   </CardContent>

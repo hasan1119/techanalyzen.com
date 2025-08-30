@@ -1,10 +1,10 @@
 "use client";
 
-import Container from '@/common/Container';
-import SectionTitle from '@/common/SectionTitle';
-import { Card } from '@/components/ui/card';
+import Container from "@/common/Container";
+import SectionTitle from "@/common/SectionTitle";
+import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from "lucide-react";
 import { Figtree, Unbounded } from "next/font/google";
 import Image from "next/image";
 
@@ -61,10 +61,13 @@ const OurProjectsSection = () => {
       <Container>
         <div className="w-full py-16 px-4 md:px-8 lg:px-0">
           <div className="text-center mb-12">
-            <motion.div initial={{ opacity: 0, y: 50 }}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true, amount: 0.2 }} className="text-center mb-12">
+              viewport={{ once: true, amount: 0.2 }}
+              className="text-center mb-12"
+            >
               <SectionTitle>Our Recent Project</SectionTitle>
             </motion.div>
           </div>
@@ -79,9 +82,7 @@ const OurProjectsSection = () => {
                 viewport={{ once: true, amount: 0.2 }}
                 custom={index}
               >
-                <Card
-                  className="group pt-9 pb-0 pl-9 pr-9 h-[434px] inset-0 bg-[#39b6501a] relative overflow-hidden rounded-xl border-0 shadow-none"
-                >
+                <Card className="group pt-9 pb-0 pl-9 pr-9 h-[434px] inset-0 bg-[#39b6501a] relative overflow-hidden rounded-xl border-0 shadow-none">
                   {/* Image */}
                   <div className="relative h-full w-full mx-auto overflow-hidden">
                     <Image
@@ -96,8 +97,16 @@ const OurProjectsSection = () => {
                   <div className="absolute bottom-0 group-hover:bottom-[33px] left-0 right-0 w-[89%] mx-auto translate-y-full group-hover:translate-y-0 transition-all duration-300">
                     <div className="bg-gradient-to-r text-lg from-green-500 via-emerald-600 to-teal-600 backdrop-blur-3xl text-white p-5 rounded-none flex items-center justify-between">
                       <div>
-                        <h3 className={`text-3xl mb-4 font-bold ${unbounded.className}`}>{project.title}</h3>
-                        <p className={`text-sm opacity-90 ${figtree.className}`}>{project.description}</p>
+                        <h3
+                          className={`text-3xl mb-4 font-bold ${unbounded.className}`}
+                        >
+                          {project.title}
+                        </h3>
+                        <p
+                          className={`text-sm opacity-90 ${figtree.className}`}
+                        >
+                          {project.description}
+                        </p>
                       </div>
 
                       {/* Arrow animation on hover */}

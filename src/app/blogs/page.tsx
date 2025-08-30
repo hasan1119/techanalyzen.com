@@ -29,7 +29,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 // Dummy blog data generator
 const CATEGORIES = ["Tech", "Business", "Health", "Travel", "Lifestyle"];
@@ -46,18 +46,15 @@ const TAGS = [
   "Design",
 ];
 function generateBlog(idx: number) {
-  // Assign badge and popularity for demo
   let badge = "";
   if (idx < 3) badge = "Recently Added";
   else if (idx % 7 === 0) badge = "Most Popular";
   else if (idx % 5 === 0) badge = "Trending";
-  // Assign category and tags
   const category = CATEGORIES[idx % CATEGORIES.length];
   const tags = Array.from(
     { length: 2 + (idx % 2) },
     (_, i) => TAGS[(idx + i) % TAGS.length]
   );
-  // Use a unique avatar for each author (using DiceBear Avatars for demo)
   const authorId = (idx % 5) + 1;
   const authorAvatar = `https://placehold.co/400x240/FFFFFF/000000.png`;
   return {
@@ -71,7 +68,7 @@ function generateBlog(idx: number) {
     badge,
     category,
     tags,
-    popularity: 100 - idx * 2 + (idx % 7 === 0 ? 30 : 0), // for demo sorting
+    popularity: 100 - idx * 2 + (idx % 7 === 0 ? 30 : 0),
     createdAt: new Date(2025, 7, (idx % 28) + 1, 12, 0, 0).getTime(),
   };
 }
@@ -108,16 +105,30 @@ export default function BlogPage() {
   >("all");
   const [dateRange, setDateRange] = useState<{
     from: Date | undefined;
-    to: Date | undefined;
+    to?: Date | undefined;
   }>({ from: undefined, to: undefined });
   const [sortBy, setSortBy] = useState<
     "relevance" | "date" | "popularity" | "rating"
   >("relevance");
   const loader = useRef<HTMLDivElement | null>(null);
 
+  // Memoize loadMore to prevent unnecessary re-renders
+  const loadMore = useCallback(() => {
+    setLoading(true);
+    setTimeout(() => {
+      const next = blogs.length;
+      const newBlogs = Array.from({ length: PAGE_SIZE }, (_, i) =>
+        generateBlog(next + i)
+      );
+      setBlogs((prev) => [...prev, ...newBlogs]);
+      setHasMore(blogs.length + newBlogs.length < 60);
+      setLoading(false);
+    }, 1200);
+  }, [blogs.length]);
+
   useEffect(() => {
     loadMore();
-  }, []);
+  }, [loadMore]);
 
   useEffect(() => {
     if (!loader.current) return;
@@ -131,20 +142,7 @@ export default function BlogPage() {
     );
     observer.observe(loader.current);
     return () => observer.disconnect();
-  }, [loading, hasMore]);
-
-  function loadMore() {
-    setLoading(true);
-    setTimeout(() => {
-      const next = blogs.length;
-      const newBlogs = Array.from({ length: PAGE_SIZE }, (_, i) =>
-        generateBlog(next + i)
-      );
-      setBlogs((prev) => [...prev, ...newBlogs]);
-      setHasMore(blogs.length + newBlogs.length < 60);
-      setLoading(false);
-    }, 1200);
-  }
+  }, [loading, hasMore, loadMore]);
 
   let filteredBlogs = blogs.filter(
     (blog) =>
@@ -222,7 +220,7 @@ export default function BlogPage() {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     className='border rounded-md pl-10 pr-4 py-2 w-full focus:ring-primary focus:outline-none outline-none focus:ring-0 ring-0 shadow-none border-gray-300'
-                  />{" "}
+                  />
                 </div>
               </div>
             </div>
@@ -319,7 +317,11 @@ export default function BlogPage() {
                             <CalendarComponent
                               mode='range'
                               selected={dateRange}
-                              onSelect={setDateRange}
+                              onSelect={(range) =>
+                                setDateRange(
+                                  range ?? { from: undefined, to: undefined }
+                                )
+                              }
                               initialFocus
                               captionLayout='dropdown'
                               className='bg-gray-800'
@@ -382,6 +384,59 @@ export default function BlogPage() {
                       </div>
                     </div>
                   </div>
+                  <div>
+                    <h3 className='text-sm font-semibold mb-2'>Sort by</h3>
+                    <div className='space-y-2'>
+                      <div className='flex items-center space-x-2'>
+                        <Checkbox
+                          id='sort-relevance'
+                          checked={sortBy === "relevance"}
+                          onCheckedChange={(checked) =>
+                            checked && setSortBy("relevance")
+                          }
+                        />
+                        <label htmlFor='sort-relevance' className='text-sm'>
+                          Relevance
+                        </label>
+                      </div>
+                      <div className='flex items-center space-x-2'>
+                        <Checkbox
+                          id='sort-date'
+                          checked={sortBy === "date"}
+                          onCheckedChange={(checked) =>
+                            checked && setSortBy("date")
+                          }
+                        />
+                        <label htmlFor='sort-date' className='text-sm'>
+                          Date
+                        </label>
+                      </div>
+                      <div className='flex items-center space-x-2'>
+                        <Checkbox
+                          id='sort-popularity'
+                          checked={sortBy === "popularity"}
+                          onCheckedChange={(checked) =>
+                            checked && setSortBy("popularity")
+                          }
+                        />
+                        <label htmlFor='sort-popularity' className='text-sm'>
+                          Popularity
+                        </label>
+                      </div>
+                      <div className='flex items-center space-x-2'>
+                        <Checkbox
+                          id='sort-rating'
+                          checked={sortBy === "rating"}
+                          onCheckedChange={(checked) =>
+                            checked && setSortBy("rating")
+                          }
+                        />
+                        <label htmlFor='sort-rating' className='text-sm'>
+                          Rating
+                        </label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </PopoverContent>
             </Popover>
@@ -403,7 +458,6 @@ export default function BlogPage() {
         </div>
       </div>
       <div className='flex w-full'>
-        {/* Left Ad (large screens only) */}
         <div className='hidden lg:flex flex-col items-center mr-6 w-48'>
           <Card className='mb-8 flex flex-col items-center justify-center h-64 bg-muted/50 w-full'>
             <Megaphone className='mb-2 text-primary' size={32} />
@@ -411,7 +465,6 @@ export default function BlogPage() {
             <span className='text-xs text-muted-foreground'>Your ad here</span>
           </Card>
         </div>
-        {/* Blog grid/list with possible middle ad */}
         <div
           className={
             layout === "grid"
@@ -419,14 +472,12 @@ export default function BlogPage() {
               : "flex flex-col gap-8 flex-1"
           }>
           {filteredBlogs.map((blog, index) => {
-            // Randomly select some indices for large cards and ads
-            const largeCard = layout === "grid" && Math.random() < 0.18; // ~18% chance
+            const largeCard = layout === "grid" && Math.random() < 0.18;
             const colSpan = largeCard
               ? Math.random() < 0.5
                 ? "lg:col-span-2"
                 : "xl:col-span-3"
               : "";
-            // Randomly show a horizontal ad (10% chance, not at index 0)
             const showMiddleAd =
               layout === "grid" && index > 0 && Math.random() < 0.1;
             return (
@@ -574,7 +625,7 @@ export default function BlogPage() {
                 <Card
                   key={"skeleton-" + idx}
                   className='flex flex-col sm:flex-row items-start sm:items-center shadow-md border py-0'>
-                  <div className='w-full h-48 sm:w-40 sm:h-36 flex-shrink-0 '>
+                  <div className='w-full h-48 sm:w-40 sm:h-36 flex-shrink-0'>
                     <Skeleton className='w-full h-full rounded-t-xl sm:rounded-t-none sm:rounded-l-xl' />
                   </div>
                   <CardContent className='flex-1 flex flex-col py-4 px-4 sm:px-6 w-full'>
@@ -597,7 +648,6 @@ export default function BlogPage() {
               )
             )}
         </div>
-        {/* Right Ad (large screens only) */}
         <div className='hidden lg:flex flex-col items-center ml-6 w-48'>
           <Card className='mb-8 flex flex-col items-center justify-center h-64 bg-muted/50 w-full'>
             <Megaphone className='mb-2 text-primary' size={32} />

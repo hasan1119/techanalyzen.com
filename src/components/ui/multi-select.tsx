@@ -38,53 +38,57 @@ export function MultiSelect({
   };
 
   const filteredOptions = options.filter((opt) =>
-    opt.toLowerCase().includes(search.toLowerCase())
+    opt.toLowerCase().includes(search.toLowerCase()),
   );
 
   const visibleOptions = filteredOptions.slice(0, visibleCount);
 
   return (
     <div>
-      {label && <div className='mb-1 text-sm font-medium'>{label}</div>}
+      {label && <div className="mb-1 text-sm font-medium">{label}</div>}
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
-            variant='outline'
-            className='w-full justify-between border min-h-[42px] h-auto p-2'
+            variant="outline"
+            className="w-full justify-between border min-h-[42px] h-auto p-2"
             aria-label={placeholder}
-            type='button'>
+            type="button"
+          >
             <div
-              className='flex flex-wrap gap-1 items-center max-h-[60px] overflow-y-auto flex-1 text-left'
-              style={{ minWidth: 0 }}>
+              className="flex flex-wrap gap-1 items-center max-h-[60px] overflow-y-auto flex-1 text-left"
+              style={{ minWidth: 0 }}
+            >
               {selected.length === 0 ? (
-                <span className='text-gray-400 whitespace-nowrap'>
+                <span className="text-gray-400 whitespace-nowrap">
                   {placeholder}
                 </span>
               ) : (
                 selected.map((item, index) => (
                   <Badge
                     key={index}
-                    className='flex items-center gap-1 pr-1 mb-1 bg-primary/80 text-white'>
-                    <span className='truncate max-w-[80px]'>{item}</span>
+                    className="flex items-center gap-1 pr-1 mb-1 bg-primary/80 text-white"
+                  >
+                    <span className="truncate max-w-[80px]">{item}</span>
                     <span
-                      role='button'
+                      role="button"
                       aria-label={`Remove ${item}`}
-                      className='ml-1 text-white p-0 h-4 w-4 flex items-center justify-center cursor-pointer hover:bg-white/20 rounded-full'
+                      className="ml-1 text-white p-0 h-4 w-4 flex items-center justify-center cursor-pointer hover:bg-white/20 rounded-full"
                       tabIndex={-1}
                       onClick={(e) => {
                         e.stopPropagation();
                         onChange(selected.filter((i) => i !== item));
-                      }}>
-                      <span className='text-lg leading-none'>×</span>
+                      }}
+                    >
+                      <span className="text-lg leading-none">×</span>
                     </span>
                   </Badge>
                 ))
               )}
             </div>
-            <ChevronDown className='ml-2 shrink-0' />
+            <ChevronDown className="ml-2 shrink-0" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className='w-64 border shadow p-2'>
+        <PopoverContent className="w-64 border shadow p-2">
           <Input
             value={search}
             onChange={(e) => {
@@ -92,34 +96,36 @@ export function MultiSelect({
               setVisibleCount(pageSize);
             }}
             placeholder={searchPlaceholder}
-            className='mb-2 focus:outline-none outline-none focus:ring-0 ring-0 shadow-none border-gray-300'
+            className="mb-2 focus:outline-none outline-none focus:ring-0 ring-0 shadow-none border-gray-300"
             style={{ boxShadow: "none" }}
           />
-          <div className='flex flex-col gap-2 max-h-56 overflow-y-auto'>
+          <div className="flex flex-col gap-2 max-h-56 overflow-y-auto">
             {visibleOptions.length > 0 ? (
               <>
                 {visibleOptions.map((option, index) => (
                   <label
                     key={index}
-                    className='flex items-center gap-2 cursor-pointer px-2 py-1 rounded'>
+                    className="flex items-center gap-2 cursor-pointer px-2 py-1 rounded"
+                  >
                     <Checkbox
                       checked={selected.includes(option)}
                       onCheckedChange={() => handleSelect(option)}
                       id={`multi-select-${option}`}
                     />
-                    <span className='text-sm'>{option}</span>
+                    <span className="text-sm">{option}</span>
                   </label>
                 ))}
                 {visibleCount < filteredOptions.length && (
                   <Button
-                    className='text-sm text-primary mt-1 px-2 py-1 hover:underline cursor-pointer'
-                    onClick={() => setVisibleCount((prev) => prev + pageSize)}>
+                    className="text-sm text-primary mt-1 px-2 py-1 hover:underline cursor-pointer"
+                    onClick={() => setVisibleCount((prev) => prev + pageSize)}
+                  >
                     Show more...
                   </Button>
                 )}
               </>
             ) : (
-              <div className='text-sm text-gray-400 text-center py-2'>
+              <div className="text-sm text-gray-400 text-center py-2">
                 No results found
               </div>
             )}

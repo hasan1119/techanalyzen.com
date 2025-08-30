@@ -34,13 +34,14 @@ export function ThemeToggle() {
 
   return (
     <button
-      aria-label='Toggle theme'
-      className='p-2 rounded focus:outline-none focus:ring'
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+      aria-label="Toggle theme"
+      className="p-2 rounded focus:outline-none focus:ring"
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+    >
       {theme === "dark" ? (
-        <Sun className='w-5 h-5' />
+        <Sun className="w-5 h-5" />
       ) : (
-        <Moon className='w-5 h-5' />
+        <Moon className="w-5 h-5" />
       )}
     </button>
   );

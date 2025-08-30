@@ -52,10 +52,13 @@ export function ServicesSection() {
     <section id="services" className="gradient-primary border-t">
       <Container>
         <div className="w-full py-18 px-4 md:px-8 lg:px-0">
-          <motion.div initial={{ opacity: 0, y: 50 }}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true, amount: 0.2 }} className="text-center mb-12">
+            viewport={{ once: true, amount: 0.2 }}
+            className="text-center mb-12"
+          >
             <SectionTitle>What We Do</SectionTitle>
           </motion.div>
 
@@ -71,7 +74,7 @@ export function ServicesSection() {
                 <Card
                   className={clsx(
                     "flex flex-col items-start justify-between h-[300px] rounded-[31px] border transition-transform hover:scale-105 hover:shadow-lg duration-200",
-                    service.darkStyle.card
+                    service.darkStyle.card,
                   )}
                 >
                   <CardHeader className="w-full items-start flex flex-col space-y-4">

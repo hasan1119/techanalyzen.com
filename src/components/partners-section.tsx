@@ -31,33 +31,34 @@ const PARTNERS = [
 
 export function PartnersSection() {
   return (
-    <section className='w-full py-12 px-4 md:px-8 lg:px-0 max-w-7xl mx-auto'>
-      <div className='text-center mb-12'>
-        <h2 className='text-3xl md:text-4xl font-bold mb-4'>Our Partners</h2>
-        <p className='text-muted-foreground text-lg max-w-2xl mx-auto'>
+    <section className="w-full py-12 px-4 md:px-8 lg:px-0 max-w-7xl mx-auto">
+      <div className="text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Partners</h2>
+        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
           We are proud to partner with some of the leading companies in the
           industry to deliver the best solutions for our clients.
         </p>
       </div>
 
       {/* Scroll Wrapper */}
-      <div className='relative overflow-hidden'>
+      <div className="relative overflow-hidden">
         {/* Animated Track */}
-        <div className='flex gap-12 w-max animate-[scroll_40s_linear_infinite]'>
+        <div className="flex gap-12 w-max animate-[scroll_40s_linear_infinite]">
           {PARTNERS.concat(PARTNERS).map((partner, idx) => (
             <div
               key={idx}
-              className='flex flex-col items-center min-w-[100px] sm:min-w-[120px] max-w-[140px] shrink-0'>
-              <div className='w-16 sm:w-20 h-16 sm:h-20 flex items-center justify-center mb-2'>
+              className="flex flex-col items-center min-w-[100px] sm:min-w-[120px] max-w-[140px] shrink-0"
+            >
+              <div className="w-16 sm:w-20 h-16 sm:h-20 flex items-center justify-center mb-2">
                 <Image
                   src={partner.logo}
                   alt={partner.name}
                   width={80}
                   height={80}
-                  className='object-contain'
+                  className="object-contain"
                 />
               </div>
-              <span className='text-xs sm:text-sm text-muted-foreground text-center'>
+              <span className="text-xs sm:text-sm text-muted-foreground text-center">
                 {partner.name}
               </span>
             </div>

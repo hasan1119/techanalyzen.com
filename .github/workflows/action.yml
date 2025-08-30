@@ -1,0 +1,25 @@
+name: Deploy via Self-Hosted Runner
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    # env:
+      # NEXT_PUBLIC_GRAPHQL_API: ${{ secrets.NEXT_PUBLIC_GRAPHQL_API }}
+      # FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
+      # MINIO_ENDPOINT: ${{ secrets.MINIO_ENDPOINT }}
+      # MINIO_SSL: ${{ secrets.MINIO_SSL }}
+      # MINIO_PORT: ${{ secrets.MINIO_PORT }}
+      # MINIO_ACCESS_KEY: ${{ secrets.MINIO_ACCESS_KEY }}
+      # MINIO_SECRET_KEY: ${{ secrets.MINIO_SECRET_KEY }}
+      # MINIO_BUCKET_NAME: ${{ secrets.MINIO_BUCKET_NAME }}
+
+    steps:
+      - name: Make deploy script executable
+        run: chmod +x "$HOME/projects/techanalyzen.com/deploy.sh"
+      - name: Run deployment script
+        run: '$HOME/projects/techanalyzen.com/deploy.sh'

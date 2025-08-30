@@ -7,13 +7,13 @@ const unbounded = Unbounded({
   weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-unbounded",
   subsets: ["latin"],
-})
+});
 
 const figtree = Figtree({
   weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-figtree",
   subsets: ["latin"],
-})
+});
 
 const Hero = () => {
   return (
@@ -52,12 +52,14 @@ const Hero = () => {
           🚀
         </motion.p>
 
-
-
-        <motion.button initial={{ opacity: 0, y: 20 }}
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }} className={`relative mt-8 inline-flex h-[54px] overflow-hidden rounded-md p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 ${figtree.className}`}>
-          <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]"></span><span className="h-full w-full cursor-pointer bg-gradient-to-r text-lg from-green-500 via-emerald-600 to-teal-600 justify-center rounded-md px-6 py-3 font-medium flex items-center gap-2 text-white backdrop-blur-3xl">
+          transition={{ duration: 1, delay: 0.6 }}
+          className={`relative mt-8 inline-flex h-[54px] overflow-hidden rounded-md p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 ${figtree.className}`}
+        >
+          <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]"></span>
+          <span className="h-full w-full cursor-pointer bg-gradient-to-r text-lg from-green-500 via-emerald-600 to-teal-600 justify-center rounded-md px-6 py-3 font-medium flex items-center gap-2 text-white backdrop-blur-3xl">
             Book a Call
             <Image
               src="https://cdn.prod.website-files.com/672a72b52eb5f37692d645a9/6799ff5246a12a0e295ca0cf_Designmonks.svg"
@@ -75,10 +77,19 @@ const Hero = () => {
         transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
         className="absolute top-10 left-16 text-4xl"
       >
-        <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M16.6378 27.5533C16.2667 26.2984 15.2851 25.3168 14.0302 24.9457L0.886591 21.0587C0.425571 20.9223 0.425569 20.2694 0.886589 20.133L14.0302 16.246C15.2851 15.8749 16.2667 14.8933 16.6378 13.6384L20.5248 0.494802C20.6612 0.033782 21.3141 0.033781 21.4505 0.494801L25.3375 13.6384C25.7086 14.8933 26.6902 15.8749 27.9451 16.246L41.0887 20.133C41.5497 20.2694 41.5497 20.9223 41.0887 21.0587L27.9451 24.9457C26.6902 25.3168 25.7086 26.2984 25.3375 27.5533L21.4505 40.6969C21.3141 41.1579 20.6612 41.1579 20.5248 40.6969L16.6378 27.5533Z" fill="#3DB44E" fillOpacity="0.25" />
+        <svg
+          width="42"
+          height="42"
+          viewBox="0 0 42 42"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M16.6378 27.5533C16.2667 26.2984 15.2851 25.3168 14.0302 24.9457L0.886591 21.0587C0.425571 20.9223 0.425569 20.2694 0.886589 20.133L14.0302 16.246C15.2851 15.8749 16.2667 14.8933 16.6378 13.6384L20.5248 0.494802C20.6612 0.033782 21.3141 0.033781 21.4505 0.494801L25.3375 13.6384C25.7086 14.8933 26.6902 15.8749 27.9451 16.246L41.0887 20.133C41.5497 20.2694 41.5497 20.9223 41.0887 21.0587L27.9451 24.9457C26.6902 25.3168 25.7086 26.2984 25.3375 27.5533L21.4505 40.6969C21.3141 41.1579 20.6612 41.1579 20.5248 40.6969L16.6378 27.5533Z"
+            fill="#3DB44E"
+            fillOpacity="0.25"
+          />
         </svg>
-
       </motion.span>
       <motion.span
         animate={{ y: [0, 20, 0] }}
