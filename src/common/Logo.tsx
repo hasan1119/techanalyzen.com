@@ -15,7 +15,7 @@ const Logo = () => {
         className='hidden dark:block'
         width='80'
         height='80'
-        src='/logo.png'
+        src='/logo-dark.png'
         alt='logo'
       />
     </Link>
