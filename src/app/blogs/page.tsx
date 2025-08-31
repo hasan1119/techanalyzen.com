@@ -25,7 +25,6 @@ import {
   Filter,
   LayoutGrid,
   ListIcon,
-  Megaphone,
   Search as SearchIcon,
 } from "lucide-react";
 import Image from "next/image";
@@ -480,14 +479,7 @@ export default function BlogPage() {
             return (
               <React.Fragment key={index}>
                 {showMiddleAd && (
-                  <Card
-                    key={`ad-middle-${blog.id}`}
-                    className='col-span-full flex flex-col items-center justify-center h-32 bg-muted/50'>
-                    <Megaphone className='mb-1 text-primary' size={24} />
-                    <span className='font-semibold'>
-                      Sponsored Advertisement
-                    </span>
-                  </Card>
+                  <AdUnit slotId='5262155604' className='my-6' />
                 )}
                 {layout === "grid" ? (
                   <Card
@@ -646,11 +638,7 @@ export default function BlogPage() {
             )}
         </div>
         <div className='hidden lg:flex flex-col items-center ml-6 w-48'>
-          <Card className='mb-8 flex flex-col items-center justify-center h-64 bg-muted/50 w-full'>
-            <Megaphone className='mb-2 text-primary' size={32} />
-            <span className='font-semibold text-lg'>Advertisement</span>
-            <span className='text-xs text-muted-foreground'>Your ad here</span>
-          </Card>
+          <AdUnit slotId='5262155604' className='my-6' />
         </div>
       </div>
       <div ref={loader} className='h-8' />
