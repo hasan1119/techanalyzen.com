@@ -39,8 +39,8 @@ export default function AdUnit({
     <>
       {type === "in-feed" ? (
         <ins
-          className='adsbygoogle'
-          style={{ display: "block" }}
+          className={`adsbygoogle ${className || ""}`}
+          style={{ display: "block", width: "100%" }}
           data-ad-format='fluid'
           data-ad-layout-key='-ef+6k-30-ac+ty'
           data-ad-client='ca-pub-5811365802634379'
