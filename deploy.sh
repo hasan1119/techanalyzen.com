@@ -27,13 +27,8 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# check if pm2 process is running for this subgraph then reload it otherwise start it
-if pm2 list | grep -q "techanalyzen-frontend"; then
-echo "Reloading techanalyzen-frontend subgraph (pm2: techanalyzen-frontend)"
-pm2 reload "techanalyzen-frontend"
-else
-echo "Starting techanalyzen-frontend subgraph (pm2: techanalyzen-frontend)"
-pm2 start npm --name "techanalyzen-frontend" -- run start
-fi
+sudo systemctl daemon-reload
+sudo systemctl restart ta-nextjs
+sudo systemctl status ta-nextjs
 
 echo "Deployment completed successfully."
