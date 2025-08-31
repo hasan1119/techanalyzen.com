@@ -459,7 +459,7 @@ export default function BlogPage() {
       </div>
       <div className='flex w-full'>
         <div className='hidden lg:flex flex-col items-center mr-6 w-48'>
-          <AdUnit slotId='5262155604' className='my-6' />
+          <AdUnit slotId='5262155604' />
         </div>
         <div
           className={
@@ -468,14 +468,18 @@ export default function BlogPage() {
               : "flex flex-col gap-8 flex-1"
           }>
           {filteredBlogs.map((blog, index) => {
-            const largeCard = layout === "grid" && Math.random() < 0.18;
+            // Deterministic large card: every 5th blog in grid layout
+            const largeCard = layout === "grid" && index % 5 === 0;
+            // Deterministic column span: alternate between lg:col-span-2 and xl:col-span-3
             const colSpan = largeCard
-              ? Math.random() < 0.5
+              ? index % 10 === 0
                 ? "lg:col-span-2"
                 : "xl:col-span-3"
               : "";
+            // Deterministic ad placement: show ad every 6th blog in grid layout
             const showMiddleAd =
-              layout === "grid" && index > 0 && Math.random() < 0.1;
+              layout === "grid" && index > 0 && index % 6 === 0;
+
             return (
               <React.Fragment key={index}>
                 {showMiddleAd && (
@@ -638,7 +642,7 @@ export default function BlogPage() {
             )}
         </div>
         <div className='hidden lg:flex flex-col items-center ml-6 w-48'>
-          <AdUnit slotId='5262155604' className='my-6' />
+          <AdUnit slotId='5262155604' />
         </div>
       </div>
       <div ref={loader} className='h-8' />

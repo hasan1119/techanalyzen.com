@@ -25,17 +25,20 @@ export default function AdUnit({
 }: AdUnitProps) {
   useEffect(() => {
     try {
-      // Push to adsbygoogle queue
       (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (err) {
-      console.error("AdSense error:", err);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else {
+        console.log("An unknown error occurred in AdUnit.");
+      }
     }
-  }, [slotId]);
+  }, []);
 
   return (
     <ins
       className={`adsbygoogle ${className || ""}`}
-      style={style || { display: "block" }}
+      style={{ display: "block", width: "100%" }}
       data-ad-client='ca-pub-5811365802634379'
       data-ad-slot={slotId}
       data-ad-format={format}
