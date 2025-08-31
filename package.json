@@ -6,6 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
+    "start:pm2": "next start --port 3001",
     "lint": "eslint",
     "lint:fix": "eslint --ext .ts,.js,.tsx . --fix && prettier --write \"./**/*.{ts,js,tsx,scss}\" \"!src/**/globals.css\"",
     "format": "prettier --write './**/*.{js,ts,tsx,scss}'"
