@@ -6,7 +6,7 @@ cd $APP_DIR || exit
 
 echo "SSH key setup..."
 eval "$(ssh-agent -s)"
-ssh-add "$HOME/.ssh/github"
+ssh-add "$HOME/.ssh/id_ed25519"
 
 echo "Stashing unstaged changes..."
 git stash save "Auto-stashed during deployment $(date)"
