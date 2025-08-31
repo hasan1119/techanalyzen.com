@@ -9,17 +9,17 @@ declare global {
 }
 
 interface AdUnitProps {
+  type?: "auto" | "in-feed";
   slotId: string; // Your AdSense ad slot ID
   className?: string;
-  style?: React.CSSProperties;
   format?: string;
   responsive?: boolean;
 }
 
 export default function AdUnit({
+  type = "auto",
   slotId,
   className,
-  style,
   format = "auto",
   responsive = true,
 }: AdUnitProps) {
@@ -36,13 +36,26 @@ export default function AdUnit({
   }, []);
 
   return (
-    <ins
-      className={`adsbygoogle ${className || ""}`}
-      style={{ display: "block", width: "100%" }}
-      data-ad-client='ca-pub-5811365802634379'
-      data-ad-slot={slotId}
-      data-ad-format={format}
-      data-full-width-responsive={responsive.toString()}
-    />
+    <>
+      {type === "in-feed" ? (
+        <ins
+          className='adsbygoogle'
+          style={{ display: "block" }}
+          data-ad-format='fluid'
+          data-ad-layout-key='-ef+6k-30-ac+ty'
+          data-ad-client='ca-pub-5811365802634379'
+          data-ad-slot='1286702831'
+        />
+      ) : (
+        <ins
+          className={`adsbygoogle ${className || ""}`}
+          style={{ display: "block", width: "100%" }}
+          data-ad-client='ca-pub-5811365802634379'
+          data-ad-slot={slotId}
+          data-ad-format={format}
+          data-full-width-responsive={responsive.toString()}
+        />
+      )}
+    </>
   );
 }

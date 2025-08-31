@@ -476,6 +476,7 @@ export default function BlogPage() {
                 ? "lg:col-span-2"
                 : "xl:col-span-3"
               : "";
+
             // Deterministic ad placement: show ad every 6th blog in grid layout
             const showMiddleAd =
               layout === "grid" && index > 0 && index % 6 === 0;
@@ -483,7 +484,7 @@ export default function BlogPage() {
             return (
               <React.Fragment key={index}>
                 {showMiddleAd && (
-                  <AdUnit slotId='5262155604' className='my-6' />
+                  <AdUnit type='in-feed' slotId='5262155604' className='' />
                 )}
                 {layout === "grid" ? (
                   <Card
