@@ -22,7 +22,7 @@ const testimonials = [
     name: "Jonathan Yombo",
     title: "Software Engineer",
     text: "Tailus templates are the perfect solution for anyone who wants to create a beautiful, functional website without any web design experience. The templates are easy to use, customizable, and responsive, and the support team is always available to help.",
-    image: "/dipto_10.jpg",
+    image: "/dipto.jpeg",
   },
   {
     name: "Yves Kakume",
