@@ -27,8 +27,10 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-sudo systemctl daemon-reload
-sudo systemctl restart ta-nextjs
-sudo systemctl status ta-nextjs
+
+# WARNING: Storing your password in plain text is insecure. For production, use sudoers NOPASSWD instead.
+echo "hasan" | sudo -S systemctl daemon-reload
+echo "hasan" | sudo -S systemctl restart ta-nextjs
+echo "hasan" | sudo -S systemctl status ta-nextjs
 
 echo "Deployment completed successfully."
