@@ -4,6 +4,9 @@ APP_DIR="$HOME/projects/techanalyzen.com"
 
 cd $APP_DIR || exit
 
+export NVM_DIR="$HOME/.nvm"
+. "$NVM_DIR/nvm.sh"
+
 echo "SSH key setup..."
 eval "$(ssh-agent -s)"
 ssh-add "$HOME/.ssh/id_ed25519"
@@ -16,10 +19,10 @@ git fetch origin
 git pull origin main --force
 
 echo "Installing dependencies..."
-/home/hasan/.nvm/versions/node/v24.7.0/bin/npm install --legacy-peer-deps
+npm install --legacy-peer-deps
 
 echo "Building project..."
-/home/hasan/.nvm/versions/node/v24.7.0/bin/npm run build
+npm run build
 
 # Check if build was successful
 if [ $? -ne 0 ]; then
