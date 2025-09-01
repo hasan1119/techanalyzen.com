@@ -16,10 +16,10 @@ git fetch origin
 git pull origin main --force
 
 echo "Installing dependencies..."
-npm install --legacy-peer-deps
+/home/hasan/.nvm/versions/node/v24.7.0/bin/npm install --legacy-peer-deps
 
 echo "Building project..."
-npm run build
+/home/hasan/.nvm/versions/node/v24.7.0/bin/npm run build
 
 # Check if build was successful
 if [ $? -ne 0 ]; then
