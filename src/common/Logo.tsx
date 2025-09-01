@@ -6,15 +6,15 @@ const Logo = () => {
     <Link href='/' className='flex items-center gap-2'>
       <Image
         className='dark:hidden'
-        width='80'
-        height='80'
+        width='200'
+        height='200'
         src='/logo-white.png'
         alt='logo'
       />
       <Image
         className='hidden dark:block'
-        width='80'
-        height='80'
+        width='200'
+        height='200'
         src='/logo-dark.png'
         alt='logo'
       />
