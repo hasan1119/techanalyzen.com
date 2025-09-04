@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
       "i.postimg.cc",
       "i.pinimg.com",
       "i.pravatar.cc",
+      "miro.medium.com",
     ],
   },
 };

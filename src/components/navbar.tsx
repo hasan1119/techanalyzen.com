@@ -23,7 +23,7 @@ const NAV_LINKS = [
   { link: "/", label: "HOME" },
   { link: "/#services", label: "SERVICES" },
   { link: "/blogs", label: "BLOGS" },
-  { link: "/about-us", label: "ABOUT US" },
+  // { link: "#about", label: "ABOUT US" },
   { link: "/#contact", label: "CONTACT US" },
   { link: "/#testimonials", label: "TESTIMONIALS" },
 ];

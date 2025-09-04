@@ -9,9 +9,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Figtree, Unbounded } from "next/font/google";
 import Image from "next/image";
 import { useMemo } from "react";
-
+const figtree = Figtree({
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-figtree",
+  subsets: ["latin"],
+});
+const unbounded = Unbounded({
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-unbounded",
+  subsets: ["latin"],
+});
 // Dummy blog data generator (copy from main blog page)
 const CATEGORIES = ["Tech", "Business", "Health", "Travel", "Lifestyle"];
 const TAGS = [
@@ -99,7 +109,7 @@ export default function BlogSinglePage() {
           <AdUnit slotId='5262155604' className='w-full' />
         </div>
         <article className='bg-card rounded-xl shadow-lg border p-6 sm:p-8 mb-16 max-w-4xl'>
-          <h1 className='text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight'>
+          <h1 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight ${unbounded.className}`}>
             {currentBlog.title}
           </h1>
           <div className='flex items-center gap-4 mb-6'>

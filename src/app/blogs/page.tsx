@@ -1,8 +1,10 @@
 "use client";
 
+import SectionTitle from "@/common/SectionTitle";
 import AdUnit from "@/components/AdUnit";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import {
   Card,
@@ -27,10 +29,20 @@ import {
   ListIcon,
   Search as SearchIcon,
 } from "lucide-react";
+import { Figtree, Unbounded } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-
+const figtree = Figtree({
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-figtree",
+  subsets: ["latin"],
+});
+const unbounded = Unbounded({
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-unbounded",
+  subsets: ["latin"],
+});
 // Dummy blog data generator
 const CATEGORIES = ["Tech", "Business", "Health", "Travel", "Lifestyle"];
 const TAGS = [
@@ -64,7 +76,7 @@ function generateBlog(idx: number) {
     author: `Author ${authorId}`,
     authorAvatar,
     date: `2025-08-${(idx % 28) + 1}`,
-    image: `https://placehold.co/400x240/FFFFFF/000000.png`,
+    image: `https://miro.medium.com/v2/resize:fit:720/format:webp/1*HzEKKfjsiB8nlbb3D3k9TA.png`,
     badge,
     category,
     tags,
@@ -200,10 +212,8 @@ export default function BlogPage() {
   return (
     <section className='container min-h-[80vh] py-16 px-4 md:px-8 lg:px-0 mx-auto'>
       <div className='mb-8'>
-        <h1 className='text-4xl md:text-5xl font-bold text-center mb-4'>
-          Blog
-        </h1>
-        <p className='text-muted-foreground text-lg max-w-2xl mx-auto mb-6 text-center'>
+        <SectionTitle>Blogs</SectionTitle>
+        <p className={`text-muted-foreground text-xl max-w-2xl mx-auto mt-4 mb-6 text-center ${figtree.className}`}>
           Insights, stories, and updates from RX Group of Corporation.
         </p>
         <div className='flex flex-wrap items-center justify-center sm:justify-end gap-4'>
@@ -506,7 +516,7 @@ export default function BlogPage() {
                           </Badge>
                         )}
                       </CardHeader>
-                      <CardContent className='pt-4 flex-1 flex flex-col'>
+                      <CardContent className='pt-4 px-4 flex-1 flex flex-col'>
                         <div className='flex flex-wrap gap-2 mb-2'>
                           <Badge variant='secondary' className=''>
                             {blog.category}
@@ -517,10 +527,10 @@ export default function BlogPage() {
                             </Badge>
                           ))}
                         </div>
-                        <CardTitle className='text-xl font-semibold mb-1'>
+                        <CardTitle className={`text-xl font-semibold mb-1 ${unbounded.className}`}>
                           {blog.title}
                         </CardTitle>
-                        <CardDescription className='mb-2 text-base text-muted-foreground'>
+                        <CardDescription className={`mb-2 text-base text-muted-foreground ${figtree.className}`}>
                           {blog.description}
                         </CardDescription>
                         <div className='mt-auto flex items-center justify-between text-xs text-muted-foreground'>
@@ -530,7 +540,7 @@ export default function BlogPage() {
                               alt={blog.author}
                               width={24}
                               height={24}
-                              className='rounded-full border bg-white w-6 h-6'
+                              className='rounded-full object-cover border bg-white w-6 h-6'
                             />
                             {blog.author}
                           </span>
