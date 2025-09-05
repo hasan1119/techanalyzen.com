@@ -213,7 +213,8 @@ export default function BlogPage() {
     <section className='container min-h-[80vh] py-16 px-4 md:px-8 lg:px-0 mx-auto'>
       <div className='mb-8'>
         <SectionTitle>Blogs</SectionTitle>
-        <p className={`text-muted-foreground text-xl max-w-2xl mx-auto mt-4 mb-6 text-center ${figtree.className}`}>
+        <p
+          className={`text-muted-foreground text-xl max-w-2xl mx-auto mt-4 mb-6 text-center ${figtree.className}`}>
           Insights, stories, and updates from RX Group of Corporation.
         </p>
         <div className='flex flex-wrap items-center justify-center sm:justify-end gap-4'>
@@ -527,10 +528,12 @@ export default function BlogPage() {
                             </Badge>
                           ))}
                         </div>
-                        <CardTitle className={`text-xl font-semibold mb-1 ${unbounded.className}`}>
+                        <CardTitle
+                          className={`text-xl font-semibold mb-1 ${unbounded.className}`}>
                           {blog.title}
                         </CardTitle>
-                        <CardDescription className={`mb-2 text-base text-muted-foreground ${figtree.className}`}>
+                        <CardDescription
+                          className={`mb-2 text-base text-muted-foreground ${figtree.className}`}>
                           {blog.description}
                         </CardDescription>
                         <div className='mt-auto flex items-center justify-between text-xs text-muted-foreground'>

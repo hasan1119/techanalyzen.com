@@ -47,7 +47,7 @@ function generateBlog(idx: number) {
     (_, i) => TAGS[(idx + i) % TAGS.length]
   );
   const authorId = (idx % 5) + 1;
-  const authorAvatar = `/logo-1.png`;
+  const authorAvatar = `https://placehold.co/400x240/FFFFFF/000000.png`;
   return {
     id: idx,
     title: `Blog Post Title ${idx + 1}`,
@@ -55,7 +55,7 @@ function generateBlog(idx: number) {
     author: `Author ${authorId}`,
     authorAvatar,
     date: `2025-08-${(idx % 28) + 1}`,
-    image: `/logo-2.jpg`,
+    image: `https://miro.medium.com/v2/resize:fit:720/format:webp/1*HzEKKfjsiB8nlbb3D3k9TA.png`,
     badge,
     category,
     tags,
@@ -109,7 +109,8 @@ export default function BlogSinglePage() {
           <AdUnit slotId='5262155604' className='w-full' />
         </div>
         <article className='bg-card rounded-xl shadow-lg border p-6 sm:p-8 mb-16 max-w-4xl'>
-          <h1 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight ${unbounded.className}`}>
+          <h1
+            className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight ${unbounded.className}`}>
             {currentBlog.title}
           </h1>
           <div className='flex items-center gap-4 mb-6'>
